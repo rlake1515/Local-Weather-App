@@ -1,13 +1,16 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 // global variables
+$(document).ready(function(){
+
 longitude = "yes";
 latitude = "no";
+var data1 = document.getElementById('data');
+console.log(data1);
+data1.innerHTML = "inserted JS text";
+
+
 //geolocation api call 
- $(function(){ $.ajax({ url :"http://ip-api.com/json",
+ $.ajax({ url :"http://ip-api.com/json",
     dataType: 'jsonp',
     success: function(data){
     country = data.country,
@@ -18,13 +21,13 @@ latitude = "no";
     latitude = (data.lat);
     longitude = (data.lon);
     $("#data").append(data.lat);
-    $("#data").append("appending data");
     }
-  });                            });
+  });                          
 $(function(){
 console.log(latitude, longitude);
 });      
   
+
 // openweather api call
 /*
 $.ajax({
@@ -32,3 +35,4 @@ $.ajax({
   })
   */
 
+});
