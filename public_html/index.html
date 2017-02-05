@@ -6,7 +6,8 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <link rel="shortcut icon" href="">
+        <link rel="stylesheet" href="StyleCSS.css" type="text/css">
+        <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,10 +15,25 @@ and open the template in the editor.
         <script src="weatherAPI.js"></script>
    
     </head>
-    <body>
-        
+    <body>        
         <div id="data" class="test">boop</div>
-        <table class="GeoResults"></table> 
-        <p> This page is not empty, has changed. Branch added </p>
+        <div id="main">
+            <div id="city">City Name</div>
+            <div id="tempBox">
+            <i id="weatherIcon">icon</i>
+            <span id="currentTemp"> 0</span>
+            <div id="highLow">
+                <div id="description">Current Weather</div>
+                <span id="temp_max"> 0</span>
+                <span id="temp_min"> 0 </span>
+            </div>
+            <div id="weeklyForecast">
+                <span> monday</span>
+                <span> tuesday</span>
+            </div>
+            </div>
+            </div>
+            
+        </div>
     </body>
 </html>
