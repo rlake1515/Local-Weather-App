@@ -14,7 +14,7 @@ html, body{
 }
 #mainBox {
     width: 500px;
-    margin: 200px auto;
+    margin: 120px auto;
     border: 1px solid blue;
     text-align: center;
     box-sizing: border-box;
@@ -25,16 +25,21 @@ html, body{
 }
 #weeklyForecast{
     border: 1px solid blue;
+    height: 100px;
 }
 #city{
     padding: 30px 0px 20px 10px;
     border: 1px solid blue;
+    font-size: 30pt;
 }
 #weatherIcon{
-    
+    padding: 30px;
 }
 #description{
     font-size: 12px;
+}
+#currentTemp{
+    font-size: 40pt;
 }
 #temp_max{
     font-size: 40;
@@ -45,4 +50,7 @@ html, body{
 }
 .dayOfWeek{
     text-align: center;
+}
+.day{
+    height: 100%;
 }
