@@ -8,48 +8,56 @@
     padding: 0;
 }
 html, body{
-    background: linear-gradient(to top right, hsl(220,50%,40%), hsl(220,20%,80%));
+    background: linear-gradient(to top right, hsl(220,100%,20%), hsl(220,30%,80%));
     background-repeat: no-repeat;
     height: 100%;
+    color: white;
+    font-weight: 700;
 }
 #mainBox {
     width: 500px;
-    margin: 120px auto;
-    border: 1px solid blue;
+    margin: 100px auto;
     text-align: center;
     box-sizing: border-box;
 }
 #tempBox{
-    border: 1px solid blue;
+    border-left: 3px solid white;
+    border-right: 3px solid white;
+    border-bottom: 3px solid white;
 }
 #weeklyForecast{
-    border: 1px solid blue;
     height: 100px;
 }
 #city{
     padding: 30px 0px 20px 10px;
-    border: 1px solid blue;
+    border: 3px solid white;
     font-size: 30pt;
+    text-transform: uppercase;
+    font-weight: 800;
 }
 #weatherIcon{
-    padding: 30px;
+    padding: 10px;
 }
 #description{
     font-size: 12px;
 }
 #currentTemp{
-    font-size: 40pt;
+    font-size: 50pt;
+    font-weight: 900;
 }
 #temp_max{
-    font-size: 40;
+    font-size: 25pt;
+    font-weight: 600;
 }
-.day {
-    border: 1px solid blue;
-    //text-align: center;
-}
-.dayOfWeek{
-    text-align: center;
+#temp_min{
+    font-size: 25pt;
+    font-weight: 600;
 }
 .day{
     height: 100%;
+    border-top: 3px solid white;
+    text-transform: uppercase;
+}
+#weatherIcon{
+    padding: 20px;
 }

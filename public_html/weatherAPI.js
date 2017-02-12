@@ -7,6 +7,7 @@ const geoOptions = {
 
 // global variables 
 weatherData = "";
+//weatherIcon = "";
 
 getGeolocation(geoOptions);
 
@@ -59,11 +60,11 @@ function renderWeatherData(data){
     weatherData = JSON.parse(data);
     console.log(weatherData);
     // access HTML elements to be updated
-    const data1 = document.getElementById('data1');
     const city = document.getElementById("city");
     const temp_max = document.getElementById("temp_max");
     const temp_min = document.getElementById("temp_min");
     const currentTemp = document.getElementById("currentTemp");
+    const weatherIcon = document.getElementById("weatherIcon");
     const day2name    = document.getElementById("day2name");
     const day3name    = document.getElementById("day3name");
     const day4name    = document.getElementById("day4name");
@@ -80,24 +81,33 @@ function renderWeatherData(data){
     const day3low = document.getElementById("day3low");
     const day4low = document.getElementById("day4low");
     const day5low = document.getElementById("day5low");
-console.log(weatherData.list[8].dt_txt);
+    const day2icon = document.getElementById("day2icon");
+    const day3icon = document.getElementById("day3icon");
+    const day4icon = document.getElementById("day4icon");
+    const day5icon = document.getElementById("day5icon");
     // add content to HTML elements
-    data1.innerHTML = weatherData.list[0].main.temp;
     city.innerHTML = weatherData.city.name;
     temp_max.innerHTML = weatherData.list[0].main.temp_max;
     temp_min.innerHTML = weatherData.list[0].main.temp_min;
     currentTemp.innerHTML = weatherData.list[0].main.temp;
-    day2high.innerHTML = weatherData.list[0].main.temp_max;
-    day3high.innerHTML = weatherData.list[8].main.temp_max;
-    day4high.innerHTML = weatherData.list[16].main.temp_max;
-    day5high.innerHTML = weatherData.list[24].main.temp_max;
-    day2low.innerHTML = weatherData.list[4].main.temp_min;
-    day3low.innerHTML = weatherData.list[12].main.temp_min;
-    day4low.innerHTML = weatherData.list[20].main.temp_min;    
-    day5low.innerHTML = weatherData.list[28].main.temp_min;
+    // report daily high and low temperatures
+    day2high.innerHTML = dailyHigh(0);
+    day3high.innerHTML = dailyHigh(8);
+    day4high.innerHTML = dailyHigh(16);
+    day5high.innerHTML = dailyHigh(24);
+    day2low.innerHTML = dailyLow(0);
+    day3low.innerHTML = dailyLow(8);
+    day4low.innerHTML = dailyLow(16);    
+    day5low.innerHTML = dailyLow(24);
+    // populate daily weather icons
+    weatherIcon.className = getWeatherIcons(weatherData.list[0].weather[0].id) + " owf-5x";
+    day2icon.className = getWeatherIcons(weatherData.list[0].weather[0].id) + " owf-2x";
+    day3icon.className = getWeatherIcons(weatherData.list[8].weather[0].id) + " owf-2x";
+    day4icon.className = getWeatherIcons(weatherData.list[16].weather[0].id) + " owf-2x";
+    day5icon.className = getWeatherIcons(weatherData.list[24].weather[0].id) + " owf-2x";
 
     // temporary for determining daily high/low
-    dailyHigh();
+    dailyHigh(0);
 
     // convert date to day of week, add to HTML
     getWeekDay(day2date, day2name);
@@ -105,7 +115,6 @@ console.log(weatherData.list[8].dt_txt);
     getWeekDay(day4date, day4name);
     getWeekDay(day5date, day5name);
     // Import weather icons from external stylesheet
-    getWeatherIcons();
     return;
 }
 // Get the day of week from timestamp
@@ -157,17 +166,50 @@ function modulus(x,m){
 }
 
 // find the 24 hour temperature high
-function dailyHigh(){
+function dailyHigh(start){
     var tempArray = [];
     for(var i = 0; i < 8; i++){
-        tempArray.append(weatherData.list[0].main.temp_max)
+        tempArray.push(weatherData.list[start+ i].main.temp_max);
     }
-    console.log(tempArray);
+    tempArray.sort(function(a,b){
+        return b-a;
+    });
+    return tempArray[0];
 }
 
-function getWeatherIcons(){
-    const weatherIcon = document.getElementById("weatherIcon");
-    weatherIcon.className += "owf owf-803 owf-5x";
-  return;  
+// find the 24 hour temperature low
+function dailyLow(start){
+    var tempArray = [];
+    for(var i = 0; i < 8; i++){
+        tempArray.push(weatherData.list[start+ i].main.temp_min);
+    }
+    tempArray.sort(function(a,b){
+        return a-b;
+    });
+    return tempArray[0];
+}
+
+function getWeatherIcons(input){
+    console.log(input);
+    var weatherIcon = "owf owf-212";
+    switch(true){
+    case input >= 200 && input <= 232:
+        weatherIcon = "owf owf-212";
+        break;
+    case input >= 300 && input <= 600:
+        weatherIcon = "owf owf-502";
+        break;
+    case input >= 600 && input <= 700:
+        weatherIcon = "owf owf-602";
+        break;
+    case input === 800:
+        weatherIcon = "owf owf-950";
+        break;
+    case input >= 801 && input <= 804:
+        weatherIcon = "owf owf-803";
+        break;
+    }
+  console.log(weatherIcon);
+  return weatherIcon;  
 };
 
