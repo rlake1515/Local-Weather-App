@@ -7,16 +7,20 @@
     margin: 0;
     padding: 0;
 }
-html, body{
-    background: linear-gradient(to top right, hsl(220,100%,20%), hsl(220,30%,80%));
+html{
+    background: linear-gradient(to top right, hsl(240,100%,20%), hsl(220,20%,90%));
     background-repeat: no-repeat;
     height: 100%;
+}
+body{ 
     color: white;
     font-weight: 700;
+    background: transparent ;
 }
 #mainBox {
     width: 500px;
-    margin: 100px auto;
+    margin: auto;
+    margin-top: 100px;
     text-align: center;
     box-sizing: border-box;
 }
@@ -24,6 +28,7 @@ html, body{
     border-left: 3px solid white;
     border-right: 3px solid white;
     border-bottom: 3px solid white;
+    border-radius: 0px 0px 25px 25px;
 }
 #weeklyForecast{
     height: 100px;
@@ -31,6 +36,7 @@ html, body{
 #city{
     padding: 30px 0px 20px 10px;
     border: 3px solid white;
+    border-radius: 25px 25px 0px 0px;
     font-size: 30pt;
     text-transform: uppercase;
     font-weight: 800;
@@ -60,4 +66,7 @@ html, body{
 }
 #weatherIcon{
     padding: 20px;
+}
+#day5name{
+    text-align: center;
 }

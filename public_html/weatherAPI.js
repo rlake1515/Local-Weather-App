@@ -1,43 +1,22 @@
-// options for geolocation
-const geoOptions = {
-    enableHighAccuracy: true, // prevents use of ip or wifi location
-    timeout: 10000, // limits request to 10 seconds
-    maximumAge: 0 // prevents the use of cached data
+
+APILocationRequest();
+
+function APILocationRequest(){
+  let request = "";
+  if (window.XMLHttpRequest){
+    request = new XMLHttpRequest();
+  }
+  request.open('GET','http://ip-api.com/json',true);
+  request.onload = function (){
+    var requestResponse = JSON.parse(request.responseText);
+    const latitude = requestResponse.lat;
+    const longitude = requestResponse.lon;
+    console.log(requestResponse.lat);
+    console.log(requestResponse.lon);
+    getWeather(latitude, longitude);
+  };
+  request.send();
 };
-
-// global variables 
-weatherData = "";
-//weatherIcon = "";
-
-getGeolocation(geoOptions);
-
-function getGeolocation(options){
-    navigator.geolocation.getCurrentPosition(
-            geoSuccess,
-            geoError,
-            options
-                   );
-    if(!navigator.geolocation){
-            console.log("Geolocation is not supported");
-            return;
-    } 
-}
-
-// if successful
-function geoSuccess(pos){
-    getWeather(
-            pos.coords.latitude,
-            pos.coords.longitude
-                    );
-    console.log(pos.coords.longitude);
-    console.log(pos.coords.latitude);
-                    
-}
-
-// if error is returned
-function geoError(err){
-    console.log(err);
-}
 
 function getWeather(latitude, longitude){
     let request = new XMLHttpRequest(); // initialize XML request
