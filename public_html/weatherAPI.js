@@ -5,6 +5,9 @@ const geoOptions = {
     maximumAge: 0 // prevents the use of cached data
 };
 
+// global variables 
+weatherData = "";
+
 getGeolocation(geoOptions);
 
 function getGeolocation(options){
@@ -53,7 +56,7 @@ function getWeather(latitude, longitude){
 
 // how to format returned JSON
 function renderWeatherData(data){
-    const weatherData = JSON.parse(data);
+    weatherData = JSON.parse(data);
     console.log(weatherData);
     // access HTML elements to be updated
     const data1 = document.getElementById('data1');
@@ -63,10 +66,20 @@ function renderWeatherData(data){
     const currentTemp = document.getElementById("currentTemp");
     const day2name    = document.getElementById("day2name");
     const day3name    = document.getElementById("day3name");
+    const day4name    = document.getElementById("day4name");
+    const day5name    = document.getElementById("day5name");
     const day2date = weatherData.list[0].dt_txt;
     const day3date = weatherData.list[8].dt_txt;
     const day4date = weatherData.list[16].dt_txt;
     const day5date = weatherData.list[24].dt_txt;
+    const day2high = document.getElementById("day2high");
+    const day3high = document.getElementById("day3high");
+    const day4high = document.getElementById("day4high");
+    const day5high = document.getElementById("day5high");
+    const day2low = document.getElementById("day2low");
+    const day3low = document.getElementById("day3low");
+    const day4low = document.getElementById("day4low");
+    const day5low = document.getElementById("day5low");
 console.log(weatherData.list[8].dt_txt);
     // add content to HTML elements
     data1.innerHTML = weatherData.list[0].main.temp;
@@ -74,7 +87,17 @@ console.log(weatherData.list[8].dt_txt);
     temp_max.innerHTML = weatherData.list[0].main.temp_max;
     temp_min.innerHTML = weatherData.list[0].main.temp_min;
     currentTemp.innerHTML = weatherData.list[0].main.temp;
-    //day2name.innerHTML = weatherData.list[0].dt_txt;
+    day2high.innerHTML = weatherData.list[0].main.temp_max;
+    day3high.innerHTML = weatherData.list[8].main.temp_max;
+    day4high.innerHTML = weatherData.list[16].main.temp_max;
+    day5high.innerHTML = weatherData.list[24].main.temp_max;
+    day2low.innerHTML = weatherData.list[4].main.temp_min;
+    day3low.innerHTML = weatherData.list[12].main.temp_min;
+    day4low.innerHTML = weatherData.list[20].main.temp_min;    
+    day5low.innerHTML = weatherData.list[28].main.temp_min;
+
+    // temporary for determining daily high/low
+    dailyHigh();
 
     // convert date to day of week, add to HTML
     getWeekDay(day2date, day2name);
@@ -99,7 +122,7 @@ function getWeekDay(date, element){
   const y = century/4;
   const z = Math.floor((w + x + y + dayOfMonth + yearOfCentury )- (2*century));
   const r = parseInt(modulus(z,7));
-  console.log(a,dayOfMonth,c,century,monthOfYear,yearOfCentury,w,x,y, z,r);
+  //console.log(a,dayOfMonth,c,century,monthOfYear,yearOfCentury,w,x,y, z,r);
 
   switch(r){
       case 0:
@@ -132,17 +155,19 @@ function getWeekDay(date, element){
 function modulus(x,m){
     return (x%m + m)%m;
 }
+
+// find the 24 hour temperature high
+function dailyHigh(){
+    var tempArray = [];
+    for(var i = 0; i < 8; i++){
+        tempArray.append(weatherData.list[0].main.temp_max)
+    }
+    console.log(tempArray);
+}
+
 function getWeatherIcons(){
     const weatherIcon = document.getElementById("weatherIcon");
     weatherIcon.className += "owf owf-803 owf-5x";
   return;  
 };
 
-/*
-var dat2 = [1,3,2,4];
-var data2 = dat2[0];
-console.log(dat2[0]);
-var data1 = document.getElementById('data1');
-console.log(data1);
-data1.innerHTML = data2;
-*/
