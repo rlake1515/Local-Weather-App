@@ -1,6 +1,7 @@
 
 APILocationRequest();
 
+// uses ip-api.com to retrieve location data
 function APILocationRequest(){
   let request = "";
   if (window.XMLHttpRequest){
